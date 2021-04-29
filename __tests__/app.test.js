@@ -31,8 +31,7 @@ describe('sign up and login routes', () => {
       .then(res => {
         expect(res.body).toEqual({
           id: '2',
-          email: process.env.TEST_USER_EMAIL_2,
-          password_hash: expect.any(String)
+          email: process.env.TEST_USER_EMAIL_2
         });
         expect(EmailService.sendSignUpConfirmation).toHaveBeenCalledTimes(1);
       });
@@ -49,7 +48,6 @@ describe('sign up and login routes', () => {
         expect(res.body).toEqual({
           id: '1',
           email: process.env.TEST_USER_EMAIL_1,
-          password_hash: expect.any(String)
         });
       });
   });
