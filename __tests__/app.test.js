@@ -21,7 +21,7 @@ describe('sign up and login routes', () => {
       });
   });
 
-  it('adds a user to to the database with an email and hashed password', () => {
+  it('adds a user to to the database with an email and hashed password and sends a confirmation email', () => {
     return request(app)
       .post('/api/v1/auth/signup')
       .send({
@@ -34,6 +34,7 @@ describe('sign up and login routes', () => {
           email: process.env.TEST_USER_EMAIL_2,
           password_hash: expect.any(String)
         });
+        expect(EmailService.sendSignUpConfirmation).toHaveBeenCalledTimes(1);
       });
   });
 
@@ -89,7 +90,7 @@ describe('password reset tests', () => {
       .then((res) => {
         expect(res.body.message).toEqual('Please check your email for a reset link!');
         expect(res.status).toEqual(200);
-        expect(EmailService.sendEmail).toHaveBeenCalledTimes(1);
+        expect(EmailService.sendResetEmail).toHaveBeenCalledTimes(1);
       });
   });
 
