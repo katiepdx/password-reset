@@ -5,8 +5,12 @@ const app = require('../lib/app');
 const UserService = require('../lib/services/UserService');
 
 // mock sendgrid email service
-jest.mock('../lib/services/EmailService.js');
-const EmailService = require('../lib/services/EmailService');
+// jest.mock('../lib/services/SG-EmailService.js');
+// const SGEmailService = require('../lib/services/SG-EmailService');
+
+// mock aws ses email service
+jest.mock('../lib/services/AWS-EmailService.js');
+const AWSEmailService = require('../lib/services/AWS-EmailService');
 
 describe('sign up and login routes', () => {
   beforeEach(() => {
@@ -33,7 +37,10 @@ describe('sign up and login routes', () => {
           id: '2',
           email: process.env.TEST_USER_EMAIL_2
         });
-        expect(EmailService.sendSignUpConfirmation).toHaveBeenCalledTimes(1);
+
+        // use SG for sendgrid and AWS for aws
+        // expect(SGEmailService.sendSignUpConfirmation).toHaveBeenCalledTimes(1);
+        expect(AWSEmailService.sendSignUpConfirmation).toHaveBeenCalledTimes(1);
       });
   });
 
@@ -88,7 +95,10 @@ describe('password reset tests', () => {
       .then((res) => {
         expect(res.body.message).toEqual('Please check your email for a reset link!');
         expect(res.status).toEqual(200);
-        expect(EmailService.sendResetEmail).toHaveBeenCalledTimes(1);
+
+        // use SG for sendgrid and AWS for aws
+        // expect(SGEmailService.sendResetEmail).toHaveBeenCalledTimes(1);
+        expect(AWSEmailService.sendResetEmail).toHaveBeenCalledTimes(1);
       });
   });
 

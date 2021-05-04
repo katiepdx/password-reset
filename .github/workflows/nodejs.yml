@@ -26,3 +26,7 @@ jobs:
         CLIENT_URL_PW_RESET: ${{ secrets.CLIENT_URL_PW_RESET }}
         TEST_USER_EMAIL_1: ${{ secrets.TEST_USER_EMAIL_1 }}
         TEST_USER_EMAIL_2: ${{ secrets.TEST_USER_EMAIL_2 }}
+        AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+        AWS_ACCESS_SECRET: ${{ secrets.AWS_ACCESS_SECRET }}
+        AWS_ACCESS_REGION: ${{ secrets.AWS_ACCESS_REGION }}
+        AWS_FROM_EMAIL: ${{ secrets.AWS_FROM_EMAIL }}
