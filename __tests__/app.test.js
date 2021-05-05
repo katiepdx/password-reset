@@ -67,7 +67,7 @@ describe('sign up and login routes', () => {
         password: 'wrong password'
       })
       .then(res => {
-        expect(res.text).toEqual('Sorry, incorrect email/password');
+        expect(res.body.message).toEqual('Sorry, incorrect email/password');
       });
   });
 
@@ -80,7 +80,7 @@ describe('sign up and login routes', () => {
         password: 'test-email-1-pw'
       })
       .then(res => {
-        expect(res.text).toEqual('Sorry, incorrect email/password');
+        expect(res.body.message).toEqual('Sorry, incorrect email/password');
       });
   });
 });
